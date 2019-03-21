@@ -3,6 +3,9 @@ def ListarProvincias(doc):
 	lista=doc.xpath('//PROVINCIA/NOMBRE/text()')
 	return lista
 #2.Contar información: Mostrar la cantidad de radares de los que tenemos información.
+def ContarRadares(doc):
+	Numeroradares=doc.xpath('count(//PROVINCIA/CARRETERA/RADAR)')
+	return int(Numeroradares)
 
 #3.Buscar o filtrar información: Pedir por teclado una provincia y mostrar el nombre 
 #de las carreteras que tiene y la cantidad de radares.
@@ -16,5 +19,10 @@ def ListarProvincias(doc):
 
 from lxml import etree
 doc=etree.parse("Radares.xml")
-for elem in ListarProvincias(doc):
-	print(elem)
+print(ContarRadares(doc))
+
+
+
+#Ejercicio1
+#for elem in ListarProvincias(doc):
+	#print(elem)
