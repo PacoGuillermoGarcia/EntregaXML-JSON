@@ -23,9 +23,39 @@ def provinciasyradares(cad,doc):
 #5.Ejercicio libre: Pedir por teclado una carretera, cuenta los radares que tiene 
 #y muestra las coordenadas de los radares.(Se puede obtener la URL de OpenStraeetMap 
 #para ver donde está el radar).
+def Coordenadas(cad,doc):
+	cantidadradares=doc.xpath('count(//CARRETERA[DENOMINACION="%s"]/RADAR)'%cad)
+	listalatitud=doc.xpath('//CARRETERA[DENOMINACION="%s"]/RADAR/PUNTO_INICIAL/LATITUD/text()'%cad)
+	listalongitud=doc.xpath('//CARRETERA[DENOMINACION="%s"]/RADAR/PUNTO_INICIAL/LONGITUD/text()'%cad)
+	listalatitud2=doc.xpath('//CARRETERA[DENOMINACION="%s"]/RADAR/PUNTO_FINAL/LATITUD/text()'%cad)
+	listalongitud2=doc.xpath('//CARRETERA[DENOMINACION="%s"]/RADAR/PUNTO_FINAL/LONGITUD/text()'%cad)
+	return int(cantidadradares),zip(listalatitud,listalongitud),zip(listalatitud2,listalongitud2)
+
+
 
 from lxml import etree
 doc=etree.parse("Radares.xml")
+
+
+#Ejercicio5
+#Carretera=input("Dime el nombre de una carretera: ")
+#Carretera2=Carretera.upper()
+#numrad,latitudlongitud,latitudlongitud2=Coordenadas(Carretera2,doc)
+#print("La carretera %s tiene estos radares: %i"%(Carretera2,numrad))
+#print("Las coordenadas del punto inicial de los radares son las siguientes: ")
+#for elem in latitudlongitud:
+#	print("======================")
+#	print("Latitud: ",elem[0])
+#	print("Longitud: ",elem[1])
+#	print("La URL de OpenStraeetMap de este punto es: https://www.openstreetmap.org/#map=16/%s/%s"%(elem[0],elem[1]))
+#print("======================")
+#print("Las coordenades del punto final de los radares son las siguiente: ")
+#for elem in latitudlongitud2:
+#	print("======================")
+#	print("Latitud: ",elem[0])
+#	print("Longitud: ",elem[1])
+#	print("La URL de OpenStraeetMap de este punto es: https://www.openstreetmap.org/#map=16/%s/%s"%(elem[0],elem[1]))
+#print("======================")
 
 #Ejercicio4
 #Carretera=input("Dime el nombre de una carretera: ")
