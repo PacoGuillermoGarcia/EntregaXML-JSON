@@ -35,54 +35,66 @@ def Coordenadas(cad,doc):
 
 from lxml import etree
 doc=etree.parse("Radares.xml")
-
-
-#Ejercicio5
-#Carretera=input("Dime el nombre de una carretera: ")
-#Carretera2=Carretera.upper()
-#numrad,latitudlongitud,latitudlongitud2=Coordenadas(Carretera2,doc)
-#print("La carretera %s tiene estos radares: %i"%(Carretera2,numrad))
-#print("Las coordenadas del punto inicial de los radares son las siguientes: ")
-#for elem in latitudlongitud:
-#	print("======================")
-#	print("Latitud: ",elem[0])
-#	print("Longitud: ",elem[1])
-#	print("La URL de OpenStraeetMap de este punto es: https://www.openstreetmap.org/#map=16/%s/%s"%(elem[0],elem[1]))
-#print("======================")
-#print("Las coordenades del punto final de los radares son las siguiente: ")
-#for elem in latitudlongitud2:
-#	print("======================")
-#	print("Latitud: ",elem[0])
-#	print("Longitud: ",elem[1])
-#	print("La URL de OpenStraeetMap de este punto es: https://www.openstreetmap.org/#map=16/%s/%s"%(elem[0],elem[1]))
-#print("======================")
-
-#Ejercicio4
-#Carretera=input("Dime el nombre de una carretera: ")
-#Carretera2=Carretera.upper()
-#print("La carretera %s pasa por las provincias: "%Carretera2)
-#listaprovincias,numradares=provinciasyradares(Carretera2,doc)
-#for elem in listaprovincias:
-#	print(elem)
-#print("La cantidad de radares que tiene esa carretera es: %i"%numradares)
-
-
-#Ejercicio3
-#Nombre=input("Dime el Nombre de una provincia: ")
-#Nombre2=Nombre.title()
-#listacarreteras,radares=CarreterasyRadares(Nombre2,doc)
-#for elem in listacarreteras:
-#	print(elem)
-#print("El numero de radares de la provincia %s es: "%Nombre2)
-
-
-
-#Ejercicio2
-#print(ContarRadares(doc))
-
-
-#print(radares)
-
-#Ejercicio1
-#for elem in ListarProvincias(doc):
-	#print(elem)
+while True:
+	print('''
+		1.-Listar nombre de las provincias
+		2.-Cantidad total de radares
+		3.-Introducir una provincia y obtener el nombre de sus carreteras y la cantidad de radares
+		4.-Introducir una carretera y obtener las provincias por las que pasa y los radares que tiene
+		5.-Introducir una carretera y obtener la cantidad de radares que tiene, las coordenadas de los radares y su URL en OpenStreetMap
+		0.-Salir''')
+	opcion=input("Opcion: ")
+	if opcion=="1":
+		for elem in ListarProvincias(doc):
+			print(elem)
+	elif opcion=="2":
+		print("Numero total de radares:",ContarRadares(doc))
+	elif opcion=="3":
+		Nombre=input("Dime el Nombre de una provincia: ")
+		Nombre2=Nombre.title()
+		while Nombre2 not in doc.xpath('//PROVINCIA/NOMBRE/text()'):
+			print("No tengo esa provincia en mis datos")
+			Nombre=input("Dime el nombre de una provincia: 	")
+			Nombre2=Nombre.title()
+		listacarreteras,radares=CarreterasyRadares(Nombre2,doc)
+		for elem in listacarreteras:
+			print(elem)
+		print("El numero de radares de la provincia %s es: %i"%(Nombre2,radares))
+	elif opcion=="4":
+		Carretera=input("Dime el nombre de una carretera: ")
+		Carretera2=Carretera.upper()
+		while Carretera2 not in doc.xpath('//CARRETERA/DENOMINACION/text()'):
+			print("No tengo esa carretera en mis datos")
+			Carretera=input("Dime el nombre de una carretera: ")
+			Carretera2=Carretera.upper()
+		print("La carretera %s pasa por las provincias: "%Carretera2)
+		listaprovincias,numradares=provinciasyradares(Carretera2,doc)
+		for elem in listaprovincias:
+			print(elem)
+		print("La cantidad de radares que tiene esa carretera es: %i"%numradares)
+	elif opcion=="5":
+		Carretera=input("Dime el nombre de una carretera: ")
+		Carretera2=Carretera.upper()
+		while Carretera2 not in doc.xpath('//CARRETERA/DENOMINACION/text()'):
+			print("No tengo esa carretera en mis datos")
+			Carretera=input("Dime el nombre de una carretera: ")
+			Carretera2=Carretera.upper()
+		numrad,latitudlongitud,latitudlongitud2=Coordenadas(Carretera2,doc)
+		print("La carretera %s tiene estos radares: %i"%(Carretera2,numrad))
+		print("Las coordenadas del punto inicial de los radares son las siguientes: ")
+		for elem in latitudlongitud:
+			print("======================")
+			print("Latitud: ",elem[0])
+			print("Longitud: ",elem[1])
+			print("La URL de OpenStraeetMap de este punto es: https://www.openstreetmap.org/#map=16/%s/%s"%(elem[0],elem[1]))
+		print("======================")
+		print("Las coordenades del punto final de los radares son las siguiente: ")
+		for elem in latitudlongitud2:
+			print("======================")
+			print("Latitud: ",elem[0])
+			print("Longitud: ",elem[1])
+			print("La URL de OpenStraeetMap de este punto es: https://www.openstreetmap.org/#map=16/%s/%s"%(elem[0],elem[1]))
+		print("======================")
+	elif opcion=="0":
+		print("Adios")
+		break
