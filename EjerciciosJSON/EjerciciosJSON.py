@@ -20,6 +20,13 @@ def contaractores(datos):
 
 #3.Buscar o filtrar información: Mostrar las películas que contengan en la sinopsis 
 #dos palabras dadas.
+def mostrarpeliculas(cad,cad2,datos):
+	listatitulos=[]
+	for pelicula in datos:
+		if cad in pelicula["storyline"] and cad2 in pelicula["storyline"]:
+			listatitulos.append(pelicula["title"])
+	return listatitulos
+
 #4.Buscar información relacionada: Mostrar las películas en las que ha trabajado un actor dado.
 #5.Ejercicio libre: Mostrar el título y la url del póster de las tres películas 
 #con una media de puntuaciones más alta y lanzadas entre dos fechas dadas.
@@ -38,3 +45,9 @@ with open ("movies.json") as fichero:
 	#for elem in contaractores(datos):
 	#	print("La pelicula %s tiene %i actores/actrices"%(elem[0],elem[1]))
 	#	print("================================================================================	")
+#Ejercicio3
+#	cad=input("Dime una palabras: ")
+#	cad2=input("Dime otra palabra: ")
+#	print("Las peliculas que tienen esas dos palabras en su sinopsis son: ")
+#	for elem in mostrarpeliculas(cad,cad2,datos):
+#		print(elem)
