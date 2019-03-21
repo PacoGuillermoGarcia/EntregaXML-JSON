@@ -15,6 +15,10 @@ def CarreterasyRadares(cad,doc):
 	return lista,int(Numeroradares)
 #4.Buscar información relacionada: Pedir por teclado una carretera, muestra las provincias 
 #por la que pasa y sus respectivos radares.
+def provinciasyradares(cad,doc):
+	listaprovincias=doc.xpath('//PROVINCIA[CARRETERA/DENOMINACION="%s"]/NOMBRE/text()'%cad)
+	cantidadradares=doc.xpath('count(//CARRETERA[DENOMINACION="%s"]/RADAR)'%cad)
+	return listaprovincias,int(cantidadradares)
 
 #5.Ejercicio libre: Pedir por teclado una carretera, cuenta los radares que tiene 
 #y muestra las coordenadas de los radares.(Se puede obtener la URL de OpenStraeetMap 
@@ -23,15 +27,23 @@ def CarreterasyRadares(cad,doc):
 from lxml import etree
 doc=etree.parse("Radares.xml")
 
+#Ejercicio4
+#Carretera=input("Dime el nombre de una carretera: ")
+#Carretera2=Carretera.upper()
+#print("La carretera %s pasa por las provincias: "%Carretera2)
+#listaprovincias,numradares=provinciasyradares(Carretera2,doc)
+#for elem in listaprovincias:
+#	print(elem)
+#print("La cantidad de radares que tiene esa carretera es: %i"%numradares)
+
 
 #Ejercicio3
-Nombre=input("Dime el Nombre de una provincia: ")
-Nombre2=Nombre.title()
-listacarreteras,radares=CarreterasyRadares(Nombre2,doc)
-for elem in listacarreteras:
-	print(elem)
-print("El numero de radares de la provincia %s es: "%Nombre2)
-print(radares)
+#Nombre=input("Dime el Nombre de una provincia: ")
+#Nombre2=Nombre.title()
+#listacarreteras,radares=CarreterasyRadares(Nombre2,doc)
+#for elem in listacarreteras:
+#	print(elem)
+#print("El numero de radares de la provincia %s es: "%Nombre2)
 
 
 
@@ -39,6 +51,7 @@ print(radares)
 #print(ContarRadares(doc))
 
 
+#print(radares)
 
 #Ejercicio1
 #for elem in ListarProvincias(doc):
