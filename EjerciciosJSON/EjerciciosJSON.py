@@ -28,6 +28,12 @@ def mostrarpeliculas(cad,cad2,datos):
 	return listatitulos
 
 #4.Buscar información relacionada: Mostrar las películas en las que ha trabajado un actor dado.
+def peliculasdeactor(actor,datos):
+	listatitulos=[]
+	for pelicula in datos:
+		if actor in pelicula["actors"]:
+			listatitulos.append(pelicula["title"])
+	return listatitulos
 #5.Ejercicio libre: Mostrar el título y la url del póster de las tres películas 
 #con una media de puntuaciones más alta y lanzadas entre dos fechas dadas.
 
@@ -51,3 +57,9 @@ with open ("movies.json") as fichero:
 #	print("Las peliculas que tienen esas dos palabras en su sinopsis son: ")
 #	for elem in mostrarpeliculas(cad,cad2,datos):
 #		print(elem)
+#Ejercicio4
+#	actor=input("Dime un actor: ").title()
+#	print("Las peliculas del actor %s son: "%actor)
+#	for elem in peliculasdeactor(actor,datos):
+#		print(elem)
+
