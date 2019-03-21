@@ -36,6 +36,14 @@ def peliculasdeactor(actor,datos):
 	return listatitulos
 #5.Ejercicio libre: Mostrar el título y la url del póster de las tres películas 
 #con una media de puntuaciones más alta y lanzadas entre dos fechas dadas.
+def tituloyposter(fecha1,fecha2,datos):
+	listatitulos=[]
+	for pelicula in datos:
+		if fecha1 <= pelicula["releaseDate"] and fecha2 >= pelicula["releaseDate"]:
+			listatitulos.append(pelicula["title"])
+	return listatitulos
+
+
 
 import json
 with open ("movies.json") as fichero:
@@ -63,3 +71,12 @@ with open ("movies.json") as fichero:
 #	for elem in peliculasdeactor(actor,datos):
 #		print(elem)
 
+#Ejercicio5
+	fecha1=input("Dime una fecha(año-mes-dia): ")
+	fecha2=input("Dime otra fecha(año-mes-dia): ")
+	while fecha1 >= fecha2:
+		print("La Segunda fecha debe ser mayor que la primera")
+		fecha1=input("Dime una fecha(año-mes-dia): ")
+		fecha2=input("Dime otra fecha(año-mes-dia): ")
+	for elem in tituloyposter(fecha1,fecha2,datos):
+		print(elem)
