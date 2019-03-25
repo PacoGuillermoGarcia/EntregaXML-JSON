@@ -38,10 +38,15 @@ def peliculasdeactor(actor,datos):
 #con una media de puntuaciones más alta y lanzadas entre dos fechas dadas.
 def tituloyposter(fecha1,fecha2,datos):
 	listatitulos=[]
+	listaurls=[]
+	listanotas=[]
 	for pelicula in datos:
 		if fecha1 <= pelicula["releaseDate"] and fecha2 >= pelicula["releaseDate"]:
-			listatitulos.append(pelicula["title"])
-	return listatitulos
+			listanotas.append(sum(pelicula["ratings"])/len(pelicula["ratings"]))
+			if sum(pelicula["ratings"])/len(pelicula["ratings"])==max(listanotas):
+				listatitulos.append(pelicula["title"])
+				listaurls.append(pelicula["posterurl"])
+	return zip(listatitulos,listaurls)
 
 
 
@@ -79,4 +84,6 @@ with open ("movies.json") as fichero:
 		fecha1=input("Dime una fecha(año-mes-dia): ")
 		fecha2=input("Dime otra fecha(año-mes-dia): ")
 	for elem in tituloyposter(fecha1,fecha2,datos):
-		print(elem)
+		print("Titulo:",elem[0])
+		print("Posterurl:",elem[1])
+		print("======================================================")
